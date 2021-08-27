@@ -3,23 +3,23 @@ const dotenv = require("dotenv");
 const morgan = require('morgan');
 const colors = require('colors')
 const logger = require('./middleware/logger');
-const MongoDB = require('./config/db'); // this need to be called after the {{{----dotenv.config({ path: "./config/config.env" });===}}}
-
+const MongoDB = require('./config/db'); 
 
 //LOAD ENV VARS
 dotenv.config({ path: "./config/config.env" });
 
 //connect to DB 
+// this need to be called after the {{{----dotenv.config({ path: "./config/config.env" });===}}}
 MongoDB();
 
 // Route files
 const bootcamps = require("./routes/bootcamps");
-const connectDB = require("./config/db");
+//const connectDB = require("./config/db");
 
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json());// when you get req.body you need body-parser now it is included with express you just need to use it
 
 if(process.env.NODE_ENV === 'development')
 {
