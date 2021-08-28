@@ -1,4 +1,6 @@
+const errorHandler = require('../utils/errorResponse');
 const Bootcamp = require('../models/Bootcamp');
+const ErrorResponse = require('../utils/errorResponse');
 
 // @Desc Get all bootcamps
 // @route GET /api/v1/bootcamps
@@ -10,7 +12,11 @@ exports.getBootcamps = async (req, res) => {
       res.status(200).json({success: true, count: bootcamp.length, body: bootcamp});
   }catch(err)
   {
-    res.status(401).json({success: false, erorr: err.message});
+    // next(new ErrorResponse(`bootcamp not found with id of ${req.params.id}`,404 ));
+    res.status(404).json({
+      success : false,
+      error: err.message
+    })
   }
 };
 
@@ -18,7 +24,7 @@ exports.getBootcamps = async (req, res) => {
 // @route GET /api/v1/bootcamps/:id
 // @Access Public
 // here we need to check if the object returned is exists because if the id 612852a373491203b6feab65 and you enter 612852a373491203b6feab60 <-{{(0 not 5)}} it will return 200  
-exports.getBootcamp = async(req, res) => {
+exports.getBootcamp = async(req, res, next) => {
   try
   {
     const bootcamp = await Bootcamp.findById(req.params.id);
@@ -29,7 +35,9 @@ exports.getBootcamp = async(req, res) => {
     res.status(200).json({success: true, body: bootcamp});
   }catch(err)
   {
-    res.status(401).json({success: false, error: err.message});
+    next(new ErrorResponse(`bootcamp not found with id of ${req.params.id}`,404 ));
+
+    // res.status(401).json({success: false, error: err.message});
   }
 
 };

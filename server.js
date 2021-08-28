@@ -1,9 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const errorHandler = require('./middleware/error');
 const morgan = require('morgan');
 const colors = require('colors')
 const logger = require('./middleware/logger');
 const MongoDB = require('./config/db'); 
+
 
 //LOAD ENV VARS
 dotenv.config({ path: "./config/config.env" });
@@ -27,6 +29,7 @@ if(process.env.NODE_ENV === 'development')
 }
 //Mount routers
 app.use("/api/v1/bootcamps", bootcamps);
+app.use(errorHandler);
 const port = process.env.port || 5000;
 
 
