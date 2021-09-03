@@ -1,4 +1,4 @@
-const { compile } = require('morgan');
+// const { compile } = require('morgan');
 let ErrorResponse = require('../utils/errorResponse');
 const errorHandler = (err,req,res,next)=>
 {
@@ -25,14 +25,7 @@ const errorHandler = (err,req,res,next)=>
             success : false,
             error: error.message || 'server Error'
         })
-
-
-
-
-
     // console.log(err.name);
-    
-    
 }
 
 module.exports = errorHandler;
