@@ -1,8 +1,8 @@
-const { compile } = require("morgan");
+// const { compile } = require('morgan');
 let ErrorResponse = require("../utils/errorResponse");
 const errorHandler = (err, req, res, next) => {
-  let error = { ...err }; //makes a copy of the err
-  error.message = err.message; // in case no if statement met, we can reference the original message
+  let error = { ...err };
+  error.message = err.message; // in case no if statement met we can reference the original message
   // console.log(err);
   if (err.name === "CastError") {
     error = new ErrorResponse(
@@ -23,7 +23,6 @@ const errorHandler = (err, req, res, next) => {
     success: false,
     error: error.message || "server Error",
   });
-
   // console.log(err.name);
 };
 
