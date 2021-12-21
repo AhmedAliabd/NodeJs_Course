@@ -16,7 +16,7 @@
     "mongoose": "^6.0.0",
     "morgan": "^1.10.0",
     "node-geocoder": "^3.27.0",
-    "slugify": "^1.6.0"
+    "slugify": "^1.6.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
